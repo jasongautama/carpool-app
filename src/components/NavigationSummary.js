@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
-import {View, Text, FlatList} from 'react-native';
-import {CardSection} from './common';
+import {View, Text, FlatList, Linking} from 'react-native';
 import {connect} from 'react-redux';
+import {CardSection, Button, Card} from './common';
 import _ from 'lodash';
 import {GOOGLE_API} from 'react-native-dotenv';
 class NavigationSummary extends Component {
@@ -13,20 +13,18 @@ class NavigationSummary extends Component {
     multiple waypoints
     https://maps.googleapis.com/maps/api/directions/json?origin=3622+Maple+Rd&destination=Thornton+Place+Seattle&waypoints=optimize:true|ifgf+seattle|rain+cafe+seattle&key=${GOOGLE_API}
     
-    
     */
+
     state={
-        data: []
+        data: [] //data to store .json response from google
     }
     componentWillMount() {
         const {origin, destination} = this.props.routes;
         const {address} = this.props.routes.member;
-        console.log(origin);
-        console.log(destination);
+        
         var or = origin.replace(/ /g, "+");
         var des = destination.replace(/ /g, "+");
-        var wp = address.replace(/ /g, "+");
-        console.log(address);
+        var wp = address.replace(/ /g, "+"); //currently only support 1 member
         
         fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${or}&destination=${des}&waypoints=optimize:true|${wp}&key=${GOOGLE_API}`)
         .then((response) => response.json())
@@ -38,13 +36,6 @@ class NavigationSummary extends Component {
             console.error(error);
         })
     }
-    /*
-      componentWillMount() {
-        _.each(this.props.members, (value, prop) => {
-        this.props.memberUpdate({prop, value});
-    });
-  }
-  */
 
     _renderItem({item}) {
         return (
@@ -56,23 +47,12 @@ class NavigationSummary extends Component {
         )
     }
 
-    _renderButton() {
-
-    }
-
     
     render() {
-        //const {name, phone, address} = this.props.routes.member; //get from MemberEdit //name="navigationForm" -- WRONG
         const {origin, destination} = this.props.routes;
-        
-        var start_addr = "";
-        var end_addr = "";
         var addr = [];
+        var strURL = "https://www.google.com/maps/dir/";
 
-        //console.log(name);
-        //console.log(phone);
-        //console.log(address);
-        
         console.log(this.state.data);
         //if data has not yet return from Google, return empty
         if (!(this.state.data && this.state.data.length))
@@ -87,14 +67,18 @@ class NavigationSummary extends Component {
             
             
             addr.push(start_address);
-            start_addr = start_address; //delete later
             
             if (i == numOfRoutes - 1) {
-                end_addr = end_address; //delete later
                 addr.push(end_address);
             }
         }
-        console.log(addr);
+
+
+        for (var i=0; i < addr.length; i++) {
+            strURL += addr[i].replace(/ /g, "+");
+            strURL += "/";
+        }
+        console.log(strURL);
 
         return(
             <View>
@@ -103,6 +87,7 @@ class NavigationSummary extends Component {
                         Summary: 
                     </Text>
                 </CardSection>
+
                 <CardSection style={styles.containerStyle}>
                     <Text style={styles.textStyles}>
                     Starting address: {origin}
@@ -112,19 +97,27 @@ class NavigationSummary extends Component {
                     {addr[0]}
                     </Text>
                 </CardSection>
+
                 <FlatList
                 data={addr.slice(1, addr.length - 1)}
                 renderItem={this._renderItem}
                 />
+
                 <CardSection style={styles.containerStyle}>
                     <Text style={styles.textStyles}>
                     Destination: {destination}
                     </Text>
+
                     <Text style={styles.textStyles}>
                     {addr[addr.length-1]}
                     </Text>
                 </CardSection>
 
+                <CardSection>
+                    <Button onPress={() => Linking.openURL(strURL)}>
+                        Start Navigation
+                    </Button>
+                </CardSection>
             </View>
         );
     }
