@@ -2,28 +2,40 @@ import React, {Component} from 'react';
 import {View, Text, TextInput} from 'react-native';
 import {connect} from 'react-redux';
 import {Actions} from 'react-native-router-flux'; //Router
-import {Button, CardSection} from './common';
+import {Button, CardSection, Confirm} from './common';
 import {submitForm} from '../actions';
 import {addressUpdate} from '../actions';
 import BackgroundImage from './BackgroundImage';
 
 class NavigationForm extends Component {
 
-    onButtonPress () {
+    state = {showError: false};
+
+    onButtonPress() {
         console.log("buttonPressed!");
         console.log(`origin: ${this.props.origin}`);
         console.log(`destination: ${this.props.destination}`);
 
+        // if one of the fields is empty, display error
+        if (!this.props.origin || !this.props.destination) {
+            this.setState({showError: !this.state.showError})
+            return (this.render());
+        }
+
         this.props.submitForm();
 
-        //console.log(this.props);
         Actions.navigationSummary({routes: this.props});
+    }
+
+    onError() {
+        this.setState({showError: false});
     }
 
     render() {
         console.log(this.props);
         const {backgroundImage, descContainerStyle, textStyle, inputStyle, inputContainerStyle} = styles;
-        
+
+
         return(
             <BackgroundImage style={backgroundImage}>
                 <View style={descContainerStyle}>
@@ -59,6 +71,13 @@ class NavigationForm extends Component {
                     
                     />
                 </View>
+
+                <Confirm
+                visible={this.state.showError}
+                onConfirm= {this.onError.bind(this)}
+                >
+                  Field(s) cannot be empty!
+              </Confirm>
 
                 <CardSection>
                     <Button onPress={this.onButtonPress.bind(this)}> 
