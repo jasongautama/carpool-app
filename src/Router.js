@@ -16,6 +16,9 @@ const RouterComponent = () => {
     */
   <Router>
     <Scene key="root" hideNavBar>
+      <Scene key="auth">
+        <Scene key="login" component={LoginForm} title="Care Group TransApp"  initial/>
+      </Scene>
 
       <Scene key="main">
         <Scene key="memberList" 
@@ -33,28 +36,16 @@ const RouterComponent = () => {
         component={MemberEdit}
         title="Edit Member" 
         />
-
         <Scene key="navigationForm"
         component={NavigationForm}
         title="Enter Location"
-        
         />
-
         <Scene key="navigationSummary"
         component={NavigationSummary}
         title="Trip Summary"
         />
-
-
-        <Scene key="auth">
-          <Scene key="login" component={LoginForm} title="Care Group TransApp"  initial/>
-        </Scene>
-
       </Scene>
 
-
-
-    
     </Scene>
   </Router>
   );

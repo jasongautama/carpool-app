@@ -36,7 +36,7 @@ const styles = {
     lineHeight: 40
   },
   containerStyle: {
-    bacgroundColor: 'rgba(0, 0, 0, 0.75)', //give opacity of 0.75,
+    bacgroundColor: 'rgba(0, 0, 0, 0.75)', //give opacity of 0.75
     flex: 1,
     position: 'relative',
     justifyContent: 'center'

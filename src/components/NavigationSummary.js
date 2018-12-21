@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {View, Text, FlatList, Linking} from 'react-native';
-import {connect} from 'react-redux';
-import {CardSection, Button, Card} from './common';
+import {CardSection, Button} from './common';
 import _ from 'lodash';
 import {GOOGLE_API} from 'react-native-dotenv';
 class NavigationSummary extends Component {
