@@ -1,3 +1,6 @@
+//Task in line 30
+
+
 import React, {Component} from 'react';
 import {FlatList} from 'react-native';
 import _ from 'lodash';
@@ -13,8 +16,8 @@ class MemberList extends Component {
   }
 
   _renderItem({item}) {
+    console.log(item);
     return <ListItem members={item} />
-    //<Icon name= 'chevron-with-circle-right' />
   }
 
   _keyExtractor = (members) => members.uid;
@@ -22,6 +25,9 @@ class MemberList extends Component {
   render() {
     const {members} = this.props;
     
+    console.log(members);
+    
+    //let's have timeout in here if it's more than 10 seconds?
     if (this.props.loading) {
       return (
         <CardSection>
