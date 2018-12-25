@@ -1,20 +1,39 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {View} from 'react-native';
+import {Text, View} from 'react-native';
 import {CardSection, Button} from './common';
 import {clearMemberForm, memberCreate, memberUpdate} from '../actions';
 import MemberForm from './MemberForm';
 
 class MemberCreate extends Component {
 
+    state = {error: false};
+
     componentWillMount() {
-        this.props.clearMemberForm()
+        this.props.clearMemberForm();
     }
 
     onButtonPress() {
         const {name, phone, address, driving} = this.props;
+        if (name == "" || phone == "" || address == "") {
+            this.setState({error: true});
+            return;
+        }
+        this.setState({error:false});
         this.props.memberCreate({name, phone, address, driving});
         //console.log(`${name}, ${phone}, ${address}, ${driving}`);
+    }
+
+    renderError() {
+        if (this.state.error) {
+            return(
+            <View style={{BackgroundColor: 'white'}}>
+                <Text style={styles.errorTextStyle}>
+                    Field(s) cannot be empty!
+                </Text>
+            </View>
+            );
+        }
     }
 
     renderButton() {
@@ -29,6 +48,7 @@ class MemberCreate extends Component {
       return (
         <View>
             <MemberForm {...this.props} />
+            {this.renderError()}
             <CardSection>
                 {this.renderButton()}
             </CardSection>
@@ -36,6 +56,14 @@ class MemberCreate extends Component {
         </View>    
       );
         
+    }
+}
+
+const styles = {
+    errorTextStyle: {
+      fontSize: 20,
+      alignSelf: 'center',
+      color: 'red'
     }
 }
 
