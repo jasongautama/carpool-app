@@ -5,6 +5,7 @@ export const LOGIN_USER_FAIL = 'login_user_fail';
 export const LOGIN_USER = 'login_user';
 
 export const MEMBER_CREATE = 'member_create';
+export const MEMBER_DELETE = 'member_delete';
 export const MEMBER_UPDATE = 'member_update';
 export const MEMBERS_FETCH = 'members_fetch';
 export const MEMBER_SAVE_SUCCESS = 'member_save_success';
