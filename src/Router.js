@@ -8,12 +8,7 @@ import NavigationForm from './components/NavigationForm';
 import NavigationSummary from './components/NavigationSummary';
 const RouterComponent = () => {
   return (
-    /*
-    change the order before deploy
-    order:
-      1. auth
-      2. main
-    */
+
   <Router>
     <Scene key="root" hideNavBar>
       <Scene key="auth">
@@ -22,9 +17,9 @@ const RouterComponent = () => {
 
       <Scene key="main">
         <Scene key="memberList" 
+        component={MemberList} 
         rightTitle="Add"
         onRight={() => Actions.memberCreate()}
-        component={MemberList} 
         title="Member's List" 
         initial
         />  
