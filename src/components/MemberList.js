@@ -5,7 +5,6 @@ import React, {Component} from 'react';
 import {FlatList} from 'react-native';
 import _ from 'lodash';
 import {connect} from 'react-redux';
-import {Icon} from 'react-native-vector-icons';
 import {CardSection, Spinner} from '../components/common';
 import {membersFetch} from '../actions';
 import ListItem from './ListItem';

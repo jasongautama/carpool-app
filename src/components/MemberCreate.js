@@ -21,7 +21,6 @@ class MemberCreate extends Component {
         }
         this.setState({error:false});
         this.props.memberCreate({name, phone, address, driving});
-        //console.log(`${name}, ${phone}, ${address}, ${driving}`);
     }
 
     renderError() {
