@@ -1,30 +1,39 @@
 import React, {Component} from 'react'
 import {View} from 'react-native';
-import {connect} from 'react-redux';
-import _ from 'lodash';
-import {Actions} from 'react-native-router-flux';
-import {CardSection, Button} from './common';
-import {memberSave, memberUpdate} from '../actions';
-import MemberForm from './MemberForm';
+import {connect} from 'react-redux'
+import _ from 'lodash'
+import {Actions} from 'react-native-router-flux'
+import {CardSection, Button} from './common'
+import {memberSave, memberUpdate, memberDelete} from '../actions'
+import MemberForm from './MemberForm'
 
 class MemberEdit extends Component {
 
+  state = {error: false};
+
   componentWillMount() {
         _.each(this.props.members, (value, prop) => {
-        this.props.memberUpdate({prop, value});
+        this.props.memberUpdate({prop, value})
     });
   }
 
     onSavePress() {
-        const {name, phone, address, driving} = this.props;
+        const {name, phone, address, driving} = this.props
 
-        this.props.memberSave({name, phone, address, driving, uid: this.props.members.uid});
+        if (name == "" || phone == "" || address == "") {
+            this.setState({error: true});
+            return;
+        }
+        this.setState({error:false})
+        this.props.memberSave({name, phone, address, driving, uid: this.props.members.uid})
+    }
 
-        console.log(`${name}, ${phone}, ${address}, ${driving}, ${this.props.members.uid}`);
+    onDeletePress() {
+        this.props.memberDelete({uid: this.props.members.uid})
     }
 
     onNavPress() {
-        Actions.navigationForm({member: this.props});
+        Actions.navigationForm({member: this.props})
     }
 
     saveButton() {
@@ -33,6 +42,13 @@ class MemberEdit extends Component {
                 Save Changes 
             </Button>
         );
+    }
+    deleteButton() {
+        return (
+            <Button onPress={this.onDeletePress.bind(this)}>
+                Delete Member
+            </Button>
+        )
     }
 
     navigateButton() {
@@ -48,11 +64,18 @@ class MemberEdit extends Component {
         <View>
             <MemberForm {...this.props} />
             <CardSection>
+                
+            </CardSection>
+            <CardSection>
                 {this.saveButton()}
             </CardSection>
                 
             <CardSection>
                 {this.navigateButton()}
+            </CardSection>
+
+            <CardSection>
+                {this.deleteButton()}
             </CardSection>
             
         </View>    
@@ -66,4 +89,4 @@ const mapStateToProps = (state) => {
     return {name, phone, address, driving}
 }
 
-export default connect(mapStateToProps, {memberSave, memberUpdate}) (MemberEdit);
+export default connect(mapStateToProps, {memberSave, memberUpdate, memberDelete}) (MemberEdit);
