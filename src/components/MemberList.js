@@ -1,47 +1,47 @@
-//Task in line 30
-
-
-import React, {Component} from 'react';
-import {FlatList} from 'react-native';
-import _ from 'lodash';
-import {connect} from 'react-redux';
-import {CardSection, Spinner} from '../components/common';
-import {membersFetch} from '../actions';
-import ListItem from './ListItem';
+import React, {Component} from 'react'
+import {FlatList} from 'react-native'
+import _ from 'lodash'
+import {connect} from 'react-redux'
+import {CardSection, Spinner} from '../components/common'
+import {membersFetch} from '../actions'
+import MyList from './MyList'
+import { Actions } from 'react-native-router-flux';
 
 class MemberList extends Component {
+
   componentWillMount() {
-    this.props.membersFetch();
+    this.props.membersFetch()
   }
 
+  onRowPress() {
+    Actions.memberEdit({members: this.props.members})
+    
+  }
+  
   _renderItem({item}) {
-    console.log(item);
-    return <ListItem members={item} />
+    return <MyList members={item}/>
   }
 
   _keyExtractor = (members) => members.uid;
  
   render() {
-    const {members} = this.props;
+    const {members} = this.props
     
-    console.log(members);
-    
-    //let's have timeout in here if it's more than 10 seconds?
-    if (this.props.loading) {
+  if (this.props.loading) {
       return (
         <CardSection>
           <Spinner size="large" />
         </CardSection>
-      );
+      )
     }
     else {
       return (
-        <FlatList
-        data={members}
-        renderItem={this._renderItem}
-        keyExtractor={this._keyExtractor}
-        /> 
-      ); 
+          <FlatList
+          data={members}
+          renderItem={this._renderItem}
+          keyExtractor={this._keyExtractor}
+          /> 
+      )
     }  
   }
 
@@ -56,7 +56,7 @@ const mapStateToProps = (state) => {
   return {
     members,
     loading: loading
-  };
-};
+  }
+}
 
-export default connect(mapStateToProps, {membersFetch}) (MemberList);
+export default connect(mapStateToProps, {membersFetch}) (MemberList)

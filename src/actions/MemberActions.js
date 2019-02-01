@@ -1,6 +1,6 @@
 import firebase from 'firebase'
 import {Actions} from 'react-native-router-flux' //Router
-import _ from 'lodash';
+import _ from 'lodash'
 import {MEMBER_CREATE, 
   MEMBER_DELETE,
   MEMBER_UPDATE,

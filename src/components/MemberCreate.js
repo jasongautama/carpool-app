@@ -66,6 +66,7 @@ const styles = {
     }
 }
 
+//getting the data from memberForm and make it as a props
 const mapStateToProps = (state) => {
   const {name, phone, address, driving} = state.memberForm;
   return {name, phone, address, driving}

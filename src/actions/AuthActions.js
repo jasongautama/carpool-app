@@ -30,14 +30,7 @@ export const loginUser = ({email, password}) => {
     // not allowing user to create account
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(user => loginUserSuccess(dispatch, user))
-      .catch(() => loginUserFail(dispatch));
-
-      /*
-      .catch(() => {
-        firebase.auth().createUserWithEmailAndPassword(email, password)
-        .then(user => loginUserSuccess(dispatch, user))
-      }); //catch end    
-      */
+      .catch(() => loginUserFail(dispatch))
   };
 }
 

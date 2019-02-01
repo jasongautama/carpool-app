@@ -9,7 +9,7 @@ import BackgroundImage from './BackgroundImage';
 
 class NavigationForm extends Component {
 
-    state = {showError: false};
+    state = {showError: false}
 
     onButtonPress() {
         console.log("buttonPressed!");
@@ -124,16 +124,6 @@ const styles={
         backgroundColor: '#fff',
         flexDirection: 'row',
         alignItems: 'center'
-
-        /*
-        borderBottomWidth: 1,
-        padding: 5,
-        backgroundColor: '#fff',
-        justifyContent: 'flex-start',
-        flexDirection: 'row',
-        borderColor: '#ddd',
-        position: 'relative' 
-        */
      }
 }
 
