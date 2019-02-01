@@ -11,9 +11,6 @@ const RouterComponent = () => {
 
   <Router>
     <Scene key="root" hideNavBar>
-      <Scene key="auth">
-        <Scene key="login" component={LoginForm} title="Care Group TransApp"  initial/>
-      </Scene>
 
       <Scene key="main">
         <Scene key="memberList" 
@@ -41,6 +38,10 @@ const RouterComponent = () => {
         />
       </Scene>
 
+      <Scene key="auth">
+        <Scene key="login" component={LoginForm} title="Care Group TransApp"  initial/>
+      </Scene>
+      
     </Scene>
   </Router>
   );
