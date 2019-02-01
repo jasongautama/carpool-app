@@ -13,3 +13,6 @@ export const MEMBERS_FETCH_SUCCESS = 'members_fetch_success';
 
 export const ADDRESS_ADD = 'address_add';
 export const ADDRESS_UPDATE = 'address_update';
+
+export const ADD_MEMBER_LIST = 'add_member_list';
+export const REMOVE_MEMBER_LIST = 'remove_member_list';

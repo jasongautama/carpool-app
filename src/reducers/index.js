@@ -1,13 +1,15 @@
-import {combineReducers} from 'redux';
-import AuthReducer from './AuthReducer';
-import MemberFormReducer from './MemberFormReducer';
-import MemberReducer from './MemberReducer';
-import NavigationFormReducer from './NavigationFormReducer';
+import {combineReducers} from 'redux'
+import AuthReducer from './AuthReducer'
+import MemberFormReducer from './MemberFormReducer'
+import MemberReducer from './MemberReducer'
+import NavigationFormReducer from './NavigationFormReducer'
+import ListReducer from './ListReducer'
 
 //Redux trail: 1st - combineReducer
 export default combineReducers({
     auth: AuthReducer,
     memberForm: MemberFormReducer,
     members: MemberReducer,
-    navigationForm: NavigationFormReducer
+    navigationForm: NavigationFormReducer,
+    list: ListReducer
 });
