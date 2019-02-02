@@ -25,16 +25,11 @@ class MyList extends Component {
             this.props.removeMember({member})
             console.log(`I UNchecked the name of ${member.name}`)
         }
-
-        console.log(this.props)
     }
 
 
     render() {
         const member = this.props.members
-        //can add longpress capabilities here
-        //OR
-        //on MemberList before MyList is called
         return (
             <View style={styles.backgroundStyle}>
                 
@@ -63,9 +58,7 @@ const styles = {
 
 
 const mapStateToProps = (state) => {
-    console.log(state.list)
     const arr = state.list
-
     return {arr}
 } 
 

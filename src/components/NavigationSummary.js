@@ -7,10 +7,10 @@ class NavigationSummary extends Component {
 
     /*
     one destination
-    https://maps.googleapis.com/maps/api/directions/json?origin=3622+Maple+Rd&destination=Thornton+Place+Seattle&key=${GOOGLE_API}
+    https://maps.googleapis.com/maps/api/directions/json?origin=Seattle&destination=Los+Angeles&key=${GOOGLE_API}
     
     multiple waypoints
-    https://maps.googleapis.com/maps/api/directions/json?origin=3622+Maple+Rd&destination=Thornton+Place+Seattle&waypoints=optimize:true|ifgf+seattle|rain+cafe+seattle&key=${GOOGLE_API}
+    https://maps.googleapis.com/maps/api/directions/json?origin=Seattle+WA&destination=Los+Angeles&waypoints=optimize:true|San+Fransisco|Portland,+Oregon&key=${GOOGLE_API}
     
     */
 
@@ -48,10 +48,10 @@ class NavigationSummary extends Component {
 
     
     render() {
-        const {origin, destination} = this.props.routes;
-        var addr = [];
-        var strURL = "https://www.google.com/maps/dir/";
-
+        const {origin, destination} = this.props.routes
+        var addr = []
+        var strURL = "https://www.google.com/maps/dir/"
+        var countWaypoints = 0
         console.log(this.state.data);
         //if data has not yet return from Google, return empty
         if (!(this.state.data && this.state.data.length))
@@ -59,23 +59,23 @@ class NavigationSummary extends Component {
 
         numOfRoutes = this.state.data.length;
         for (var i = 0; i < numOfRoutes; i++) {
-            const {start_address, end_address} = this.state.data[i];
-            console.log(`array: ${i}`);
-            console.log(start_address);
-            console.log(end_address);
+            const {start_address, end_address} = this.state.data[i]
+            console.log(`array: ${i}`)
+            console.log(start_address)
+            console.log(end_address)
             
             
-            addr.push(start_address);
+            addr.push(start_address)
             
             if (i == numOfRoutes - 1) {
-                addr.push(end_address);
+                addr.push(end_address)
             }
         }
 
 
         for (var i=0; i < addr.length; i++) {
-            strURL += addr[i].replace(/ /g, "+");
-            strURL += "/";
+            strURL += addr[i].replace(/ /g, "+")
+            strURL += "/"
         }
         console.log(strURL);
 
