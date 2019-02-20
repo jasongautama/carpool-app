@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Provider} from 'react-redux'
 import { createStore, applyMiddleware } from 'redux';
-import firebase from 'firebase';
+import firebase from '@firebase/app'
 import ReduxThunk from 'redux-thunk'; 
 import {FB_API_KEY, FB_AUTH_DOMAIN,
   FB_DB_URL, FB_PROJ_ID, FB_STORAGE_BUCKET, 
