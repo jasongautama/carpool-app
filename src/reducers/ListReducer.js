@@ -6,23 +6,12 @@ import {
 export default (state = [], action) => {
     switch(action.type) {
         case ADD_MEMBER_LIST:
-            return [...state, action.payload]
-            
-        //REMOVING IS TRICKY HERE! START FROM HERE
+            var tempArr = [...state, action.payload.member]
+            return tempArr
         case REMOVE_MEMBER_LIST:
-            var newArr = state
-            console.log(`action payload: ${action.payload}`)
-            var index = state.indexOf(action.payload.uid) //find object to be deleted
-            console.log(`INDEX = ${index}`);
-            if (index !== -1) {
-                //use slice from 0 to index; index + 1 to state.length
-                var firArr = state.slice(0, index)
-                var secArr = state.slice(index + 1, state.length)
-                newArr = firArr.concat(secArr)
-            }
-            console.log(`NEWARR = ${newArr}`);
+            var newArr = state.filter(mem => mem.uid != action.payload.member.uid)
             return newArr
-        
+            
         default:
             return state
     }

@@ -33,7 +33,7 @@ class MemberEdit extends Component {
     }
 
     onNavPress() {
-        Actions.navigationForm({member: this.props})
+        Actions.navigationForm({member: this.props, waypoints: []})
     }
 
     saveButton() {

@@ -12,14 +12,19 @@ const INITIAL_STATE = {
 };
 
 export default (state = INITIAL_STATE, action) => {
-
   switch (action.type) {
     case MEMBERS_FETCH:
-      return {...state, loading: true};
+      return {...state, loading: true}
     case MEMBERS_FETCH_SUCCESS:
-      return action.payload;
+      console.log(action.payload)
+      /*
+      if (action.payload === undefined) {
+        return null
+      }
+      */
+      return action.payload
     default:
-      return state;
+      return state
   }
 
 };

@@ -19,11 +19,11 @@ class NavigationForm extends Component {
         // if one of the fields is empty, display error
         if (!this.props.origin || !this.props.destination) {
             this.setState({showError: !this.state.showError})
-            return (this.render());
+            return
         }
 
-        this.props.submitForm();
-
+        this.props.submitForm()
+        console.log(this.props)
         Actions.navigationSummary({routes: this.props});
     }
 
@@ -32,7 +32,6 @@ class NavigationForm extends Component {
     }
 
     render() {
-        console.log(this.props);
         const {backgroundImage, descContainerStyle, textStyle, inputStyle, inputContainerStyle} = styles;
 
 

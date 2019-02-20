@@ -18,12 +18,30 @@ class NavigationSummary extends Component {
         data: [] //data to store .json response from google
     }
     componentWillMount() {
+        const multipleWayPts = 2;
         const {origin, destination} = this.props.routes;
-        const {address} = this.props.routes.member;
-        
+        console.log(this.props) //this.props.routes.waypoints
+
+        const length = this.props.routes.waypoints.length
         var or = origin.replace(/ /g, "+");
         var des = destination.replace(/ /g, "+");
-        var wp = address.replace(/ /g, "+"); //currently only support 1 member
+        var wp = ""
+
+        //one waypoint
+        if (length < multipleWayPts) {
+            const {address} = this.props.routes.member
+            wp = address.replace(/ /g, "+")
+        }
+        else {
+            for (var i = 0; i < length; i++) {
+                const {address} = this.props.routes.waypoints[i]
+                var temp = address.replace(/ /g, "+")
+                wp += temp + "|"
+            }
+        }
+
+        
+        
         
         fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${or}&destination=${des}&waypoints=optimize:true|${wp}&key=${GOOGLE_API}`)
         .then((response) => response.json())
@@ -48,11 +66,13 @@ class NavigationSummary extends Component {
 
     
     render() {
+        console.log(this.props)
         const {origin, destination} = this.props.routes
         var addr = []
         var strURL = "https://www.google.com/maps/dir/"
-        var countWaypoints = 0
+
         console.log(this.state.data);
+        
         //if data has not yet return from Google, return empty
         if (!(this.state.data && this.state.data.length))
             return null;
