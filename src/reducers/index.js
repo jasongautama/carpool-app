@@ -4,6 +4,7 @@ import MemberFormReducer from './MemberFormReducer'
 import MemberReducer from './MemberReducer'
 import NavigationFormReducer from './NavigationFormReducer'
 import ListReducer from './ListReducer'
+import DisabledReducer from './DisabledReducer'
 
 //Redux trail: 1st - combineReducer
 export default combineReducers({
@@ -11,5 +12,6 @@ export default combineReducers({
     memberForm: MemberFormReducer,
     members: MemberReducer,
     navigationForm: NavigationFormReducer,
-    list: ListReducer
+    list: ListReducer,
+    disabled: DisabledReducer
 });
