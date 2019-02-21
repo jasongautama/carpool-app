@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {FlatList, View} from 'react-native'
-import _ from 'lodash'
-import { Actions } from 'react-native-router-flux';
+import _ from 'lodash/core'
+import { Actions } from 'react-native-router-flux'
 import {connect} from 'react-redux'
 import {CardSection, Spinner, Button} from '../components/common'
 import {membersFetch, clearList} from '../actions'
@@ -80,9 +80,10 @@ const styles = {
 }
 
 const mapStateToProps = (state) => {
-  const members = _.map(state.members, (val, uid) => {
-    return {...val, uid};
+  const members = _.map(state.members,(val, uid) => {
+    return {...val, uid}
   })
+  console.log(members)
   const {loading} = state.members
   const list = state.list
   const disable = state.disabled

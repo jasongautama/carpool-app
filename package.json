@@ -13,7 +13,7 @@
     "lodash": "^4.17.11",
     "merge": "^1.2.1",
     "react": "^16.6.0",
-    "react-native": "^0.57.4",
+    "react-native": "^0.58.5",
     "react-native-check-box": "^2.1.6",
     "react-native-dotenv": "^0.2.0",
     "react-native-elements": "^0.19.1",
@@ -25,7 +25,7 @@
   },
   "devDependencies": {
     "babel-jest": "23.6.0",
-    "jest": "23.6.0",
+    "jest": "^24.1.0",
     "metro-react-native-babel-preset": "0.48.0",
     "react-test-renderer": "16.5.0",
     "schedule": "^0.4.0"
