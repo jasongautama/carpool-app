@@ -6,7 +6,7 @@
 .env
 
 #ios folder
-ios
+ios/
 
 # Xcode
 #
